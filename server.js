@@ -9,7 +9,11 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social_network_
     .catch(err => console.log(err));
 
 
+
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api',require('./routes'));
 
