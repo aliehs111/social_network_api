@@ -3,6 +3,11 @@ const {
   createThought, deleteThoughtById, getThoughtById, getAllThoughts, updateThoughtById,
 } = require('../controllers/thoughts');
 
+const {
+  createReaction, deleteReactionById,
+} = require('../controllers/reactions');
+
+
 //middleware to validate user id in request body for getting thoughts
 function validateCreateThought(req, res, next) {
   const { userId } = req.body;
@@ -25,5 +30,10 @@ router.post('', validateCreateThought, createThought);
 router.put('/:id', updateThoughtById);
 //delete thought by id
 router.delete('/:id', deleteThoughtById);
+//add reaction to thought
+router.post('/:thoughtId/reactions', createReaction);
+//delete reaction
+router.delete('/:thoughtId/reactions/:reactionId', deleteReactionById);
+
 
 module.exports = router;

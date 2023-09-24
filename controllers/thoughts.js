@@ -1,4 +1,4 @@
-const { Thought } = require('../models');
+const { User, Thought } = require('../models');
 
 module.exports = {
     // get all thoughts
@@ -31,21 +31,20 @@ module.exports = {
 
     // create thought (and push the created thought's _id to the associated user's thoughts array field)
     createThought({ body }, res) {
-        const { userId, userName, thoughtText } = body;
+        const { userId, username, thoughtText } = body;
     
-        // Check if userId, userName, and thoughtText are present in the request body
-        if (!userId || !userName || !thoughtText /* || other validation checks */) {
+        // Check if userId, username, and thoughtText are present in the request body
+        if (!userId || !username || !thoughtText /* || other validation checks */) {
             res.status(400).json({ message: 'Invalid request body' });
             return;
         }
     
         Thought.create({
             thoughtText,  // Include the thoughtText field when creating the thought
-            userName,
-            // Other fields from the request body if needed
+            username,     // Include the username field when creating the thought
         })
             .then(dbThoughtData => {
-                // After creating the thought, you can update the associated user
+                // After creating the thought, update the associated user
                 // to add the thought's _id to their thoughts array field.
                 return User.findByIdAndUpdate(
                     userId,
@@ -59,7 +58,7 @@ module.exports = {
                     res.status(404).json({ message: 'User not found!' });
                     return;
                 }
-                res.json(dbThoughtData);
+                res.json(dbUserData);
             })
             .catch(err => {
                 console.log(err);
