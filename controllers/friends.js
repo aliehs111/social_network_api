@@ -3,7 +3,7 @@ const { User } = require('../models');
 module.exports = {
     // Add a friend to a user's friend list
     addFriend(req, res) {
-        const { userId, friendId } = req.params;
+        const { userId, friendId } = req.body;
 
         // Check if userId and friendId are present
         if (!userId || !friendId) {
@@ -28,29 +28,28 @@ module.exports = {
             });
     },
     //DELETE to remove a friend from a user's friend list
-    deleteFriend(req, res, result) {
+    deleteFriend(req, res) {
         const { userId, friendId } = req.params;
         console.log(friendId);
         // Check if friendId is present
         if (!friendId) {
             return res.status(400).json({ message: 'Invalid request' });
         }
-        //
-
         // Find the friend by its ID and remove it from the friends array in the associated user
         User.findByIdAndUpdate(
             userId,
-            { $pull: { friends: { friendId: friendId } } },
-            { new: true },
+            { $pull: { friends:friendId } },
+            { new: true }
             //if deleted, return message successfully deleted friend
-            res.json({ message: 'Successfully deleted friend' })
-
+            // res.json({ message: 'Successfully deleted friend' })
         )
+      
             .then(dbUserData => {
                 if (!dbUserData) {
                     return res.status(404).json({ message: 'User not found' });
                 }
-                res.json(dbUserData);
+            res.json(dbUserData);
+                
             })
             .catch(err => {
                 console.error(err);

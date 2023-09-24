@@ -29,7 +29,7 @@ const usersSeedData = [
         { reactionBody: 'Reaction 2 to Thought 1', username: 'user2' },
       ],
     },
-    // Other thought data with embedded reactions...
+ 
   ];
   
   module.exports = { usersSeedData, thoughtsSeedData, reactionsSeedData };

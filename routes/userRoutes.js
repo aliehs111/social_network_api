@@ -18,8 +18,8 @@ router.put('/:id', updateUserById);
 //delete user by id
 router.delete('/:id', deleteUserById);
 //add friend to user list
-router.get('/friends/:id', addFriend);
+router.post('/:userId/friends/:friendId', addFriend);
 //delete friend from user list
-router.delete('/friends/:id', deleteFriend);
+router.delete('/:userId/friends/:friendId', deleteFriend);
 
 module.exports = router;

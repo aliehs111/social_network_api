@@ -52,7 +52,6 @@ module.exports = {
             { new: true },
             //if deleted, return message successfully deleted reaction
             res.json({ message: 'Successfully deleted reaction' })
-
         )
             .then(dbThoughtData => {
                 if (!dbThoughtData) {

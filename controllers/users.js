@@ -8,6 +8,10 @@ module.exports = {
                 path: 'thoughts',
                 select: '-__v'
             })
+            // .populate({
+            //     path: 'friends',
+            //     select: 'username' // Populate the 'friends' field with 'username'
+            //   })
             .select('-__v')
             .then(dbUserData => res.json(dbUserData))
             .catch(err => {
