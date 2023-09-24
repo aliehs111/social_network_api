@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/User'); // Import User model here
 const Thought = require('../models/Thought'); // Import Thought model 
-const { usersSeedData, thoughtsSeedData } = require('../utils/data'); // Import seed data for users
+const { usersSeedData, thoughtsSeedData } = require('./data'); // Import seed data for users
 
 // Connect to the database
 mongoose.connect('mongodb://localhost/myapp', {
@@ -14,8 +14,8 @@ mongoose.connect('mongodb://localhost/myapp', {
 // Function to seed the User collection
 const seedUsers = async () => {
   try {
-    // Remove existing users (optional)
-    await User.deleteMany();
+    // // Remove existing users (optional)
+    // await User.deleteMany();
 
     // Insert seed data into the User collection
     await User.insertMany(usersSeedData);
@@ -35,8 +35,8 @@ seedUsers();
 //seed thought data
 const seedThoughts = async () => {
   try {
-    // Remove existing thoughts (optional)
-    await Thought.deleteMany();
+    // // Remove existing thoughts (optional)
+    // await Thought.deleteMany();
 
     // Insert seed data into the Thought collection
     await Thought.insertMany(thoughtsSeedData);
@@ -55,8 +55,8 @@ seedThoughts();
 //seed reactions
 const seedReactions = async () => {
   try {
-    // Remove existing reactions (optional)
-    await Reaction.deleteMany();
+    // // Remove existing reactions (optional)
+    // await Reaction.deleteMany();
 
     // Insert seed data into the Reaction collection
     await Reaction.insertMany(reactionsSeedData);
