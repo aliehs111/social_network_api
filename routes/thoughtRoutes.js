@@ -1,19 +1,23 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
-  createThought, deleteThoughtById, getThoughtById, getAllThoughts, updateThoughtById,
-} = require('../controllers/thoughts');
+  createThought,
+  deleteThoughtById,
+  getThoughtById,
+  getAllThoughts,
+  updateThoughtById,
+} = require("../controllers/thoughts");
 
 const {
-  createReaction, deleteReactionById,
-} = require('../controllers/reactions');
-
+  createReaction,
+  deleteReactionById,
+} = require("../controllers/reactions");
 
 //middleware to validate user id in request body for getting thoughts
 function validateCreateThought(req, res, next) {
   const { userId } = req.body;
 
   if (!userId) {
-      return res.status(400).json({ message: 'Invalid request body' });
+    return res.status(400).json({ message: "Invalid request body" });
   }
 
   // If all validation checks pass, continue to the next middleware/controller.
@@ -21,19 +25,18 @@ function validateCreateThought(req, res, next) {
 }
 
 //get all thoughts
-router.get('', getAllThoughts);
+router.get("", getAllThoughts);
 //get thought by id
-router.get('/:id', getThoughtById);
+router.get("/:id", getThoughtById);
 //create thought//add validateCreateThought as middleware
-router.post('', validateCreateThought, createThought);
+router.post("", validateCreateThought, createThought);
 //update thought by id
-router.put('/:id', updateThoughtById);
+router.put("/:id", updateThoughtById);
 //delete thought by id
-router.delete('/:id', deleteThoughtById);
+router.delete("/:id", deleteThoughtById);
 //add reaction to thought
-router.post('/:thoughtId/reactions', createReaction);
+router.post("/:thoughtId/reactions", createReaction);
 //delete reaction
-router.delete('/:thoughtId/reactions/:reactionId', deleteReactionById);
-
+router.delete("/:thoughtId/reactions/:reactionId", deleteReactionById);
 
 module.exports = router;
